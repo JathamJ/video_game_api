@@ -1,0 +1,14 @@
+syntax = "v1"
+
+type Request {
+	Name string `path:"name,options=you|me"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+service video_game_api-api {
+	@handler Video_game_apiHandler
+	get /from/:name(Request) returns (Response)
+}
