@@ -62,6 +62,6 @@ func (m *customGSceneModel) FindAll(ctx context.Context, builder squirrel.Select
 
 func (m *customGSceneModel) FindListByGameIdAndParentId(ctx context.Context, gameId, parentId int64) ([]*GScene, error) {
 	sb := squirrel.Select().From(m.table).Where("game_id = ?", gameId).
-		Where("parent_id = ?", parentId)
+		Where("FIND_IN_SET(?, parent_id) > 0", parentId)
 	return m.FindAll(ctx, sb, "id asc")
 }

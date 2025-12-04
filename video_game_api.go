@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/JathamJ/zero_base/httpo"
 	"github.com/zeromicro/go-zero/rest/httpx"
+	"video_game_api/internal/middleware"
 
 	"video_game_api/internal/config"
 	"video_game_api/internal/handler"
@@ -24,6 +25,9 @@ func main() {
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
+
+	// cors to easily test,don't use it in production
+	server.Use(middleware.CorsMiddleware)
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)

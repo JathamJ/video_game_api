@@ -39,7 +39,7 @@ type (
 	GScene struct {
 		Id         int64     `db:"id"`          // 主键
 		GameId     int64     `db:"game_id"`     // 游戏id
-		ParentId   int64     `db:"parent_id"`   // 父级id
+		ParentId   string    `db:"parent_id"`   // 父级id
 		Label      string    `db:"label"`       // 选项名称
 		LabelAudio string    `db:"label_audio"` // 标签音效
 		Title      string    `db:"title"`       // 场景标题
