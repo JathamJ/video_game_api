@@ -2,7 +2,7 @@
 [video_game_api](https://github.com/JathamJ/video_game_api) 是一个视频交互游戏的后端服务，基于 go-zero 框架开发。
 
 ### 视频交互游戏示例
-[点击链接查看](https://aigame.gzquan.cn/)
+[点击链接体验游戏](https://aigame.gzquan.cn/)
 
 手机扫码体验：
 <img src="https://qn.gzquan.cn/exported_qrcode_image_600.png" alt="二维码" width="200" />
