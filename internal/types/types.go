@@ -10,3 +10,24 @@ type Request struct {
 type Response struct {
 	Message string `json:"message"`
 }
+
+type GameVideoReq struct {
+	GameId  int64 `form:"gameId"`
+	SceneId int64 `form:"sceneId"`
+}
+
+type GameVideoResp struct {
+	Id      int64             `json:"id"`
+	Video   string            `json:"video"` // video url
+	Title   string            `json:"title"`
+	Brief   string            `json:"brief"`
+	Options []GameVideoOption `json:"options"` // children node
+}
+
+type GameVideoOption struct {
+	Id    int64  `json:"id"`
+	Value string `json:"value"` // option text
+	Audio string `json:"audio"` // audio url
+	Video string `json:"video"` // video url
+	Title string `json:"title"`
+}

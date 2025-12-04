@@ -8,7 +8,36 @@ type Response {
 	Message string `json:"message"`
 }
 
+type GameVideoReq {
+	GameId  int64 `form:"gameId"`
+	SceneId int64 `form:"sceneId"`
+}
+
+type GameVideoResp {
+	Id      int64             `json:"id"`
+	Video   string            `json:"video"` // video url
+	Title   string            `json:"title"`
+	Brief   string            `json:"brief"`
+	Options []GameVideoOption `json:"options"` // children node
+}
+
+type GameVideoOption {
+	Id    int64  `json:"id"`
+	Value string `json:"value"` // option text
+	Audio string `json:"audio"` // audio url
+	Video string `json:"video"` // video url
+	Title string `json:"title"`
+}
+
+@server(
+	prefix: v1/game
+	group: v1/game
+	middleware: AuthMiddleware
+)
 service video_game_api-api {
 	@handler Video_game_apiHandler
 	get /from/:name(Request) returns (Response)
+
+	@handler videoHandler
+	get /video (GameVideoReq) returns (GameVideoResp)
 }

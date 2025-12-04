@@ -6,6 +6,7 @@ package handler
 import (
 	"net/http"
 
+	v1game "video_game_api/internal/handler/v1/game"
 	"video_game_api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -13,12 +14,21 @@ import (
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/from/:name",
-				Handler: Video_game_apiHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.AuthMiddleware},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/from/:name",
+					Handler: v1game.Video_game_apiHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/video",
+					Handler: v1game.VideoHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithPrefix("/v1/game"),
 	)
 }
